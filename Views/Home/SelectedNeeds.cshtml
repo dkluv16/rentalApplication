@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "SelectedNeeds";
+    var session = new RegisterSession(Context.Session);
+}
+
+<h1>Selected Needs</h1>
+<br />
+<br />
+<div class="row">
+    @if (session.GetHousingChoice() != null)
+    {
+        <div class="col-sm-6 col-md-4" id="1 cont" >
+            <a asp-area="" asp-controller="Home" asp-action="Housing" class="thumbnail">
+                <img src="~/img/Housing.jpg" alt="..."><span class="badge">@(session.GetHousingComplete())</span>
+            </a>
+            <div class="caption">
+                <h3>Housing & Meeting Space</h3>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-sm-6 col-md-4" id="1 cont" style="display:none;">
+        </div>
+    }
+    @if (session.GetActivitesChoice() != null)
+    {
+        <div class="col-sm-6 col-md-4" id="2 cont" >
+            <a asp-area="" asp-controller="Home" asp-action="Activities" class="thumbnail">
+                <img src="~/img/Activity.jpg" alt="..."><span class="badge">@(session.GetActivitesComplete())</span>
+            </a>
+            <div class="caption">
+                <h3>Activities</h3>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-sm-6 col-md-4" id="2 cont" style="display:none;">
+         
+        </div>
+    }
+    @if (session.GetMealChoice() != null)
+    {
+        <div class="col-sm-6 col-md-4" id="3 cont" >
+            <a asp-area="" asp-controller="Home" asp-action="Meals" class="thumbnail">
+                <img src="~/img/Meals.jpg" alt="..."><span class="badge">@(session.GetMealsComplete())</span>
+            </a>
+            <div class="caption">
+                <h3>Meals</h3>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-sm-6 col-md-4" id="3 cont" style="display:none;">
+          
+        </div>
+    }
+</div>

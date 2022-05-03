@@ -1,0 +1,50 @@
+﻿@model ActivityType
+@{
+    ViewData["Title"] = "EditActivitiesType";
+}
+
+<h1>@ViewBag.Action Activities</h1>
+
+<br />
+
+<form asp-action="AddActivitiesType" method="post">
+    <div class="row">
+        <div class="col">
+            <label class="label" asp-for="name">Name:</label>
+            <input asp-for="name" type="text" class="form-control" id="name" />
+        </div>
+        <div class="col">
+            <label class="label" asp-for="cost">Cost:</label>
+            <input asp-for="cost" type="number" class="form-control" id="cost" />
+        </div>
+        <div class="col">
+            <label class="label" asp-for="timeOfYearId">Time Of Year:</label>
+            <select class="form-control" asp-for="timeOfYearId">
+                @foreach (TimeOfYear a in ViewBag.TimeOfYear)
+                {
+                    <option value="@a.timeOfYearId">@a.season</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <label class="label" asp-for="isActive">Is Active:</label>
+            <input asp-for="isActive" type="checkbox" class="form-control" id="isActive" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label class="label" asp-for="description">Description:</label>
+            <input asp-for="description" type="text" class="form-control" id="description" />
+        </div>
+    </div>
+    <br />
+    <br />
+    <input type="hidden" asp-for="activityTypeId" />
+    <div class="form-group">
+        <button class="btn-dark" type="submit" value="Submit">@ViewBag.Action</button>
+        <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="ActvitiesType">Close</a>
+    </div>
+</form>
+<br />
+<br />
+

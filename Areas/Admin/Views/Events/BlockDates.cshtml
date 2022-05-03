@@ -1,0 +1,44 @@
+﻿@model List<BlockDates>
+@{
+    ViewData["Title"] = "BlockDates";
+}
+
+<h1>Block-out Dates</h1>
+
+<br />
+
+<div class="row">
+    <div class="col">
+        <br />
+       
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Start Date:</th>
+                        <th>End Date:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var block in @Model)
+                    {
+                        <tr>
+                            <td>@block.blockDatesId</td>
+                            <td>@block.startDate</td>
+                            <td>@block.endDate</td>
+                            <td>
+                                <a asp-area="Admin" asp-controller="Events" asp-action="EditBlockDates" asp-route-id="@block.blockDatesId"><img src="~/img/edit.png" alt="View" style="width:24px; height:24px;" /></a>
+                                <a asp-area="Admin" asp-controller="Events" asp-action="DeleteBlockDate" asp-route-id="@block.blockDatesId"><img src="~/img/bin.png" alt="View" style="width:24px; height:24px;" /></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a class="btn btn-success ml-2" asp-area="Admin" asp-action="AddBlockDates">Add</a>
+            <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="Dashboard">Close</a>
+            <br />
+       
+    </div>
+</div>
+<br />
+<br />

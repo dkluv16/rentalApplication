@@ -1,0 +1,61 @@
+﻿@model User
+@{
+    ViewData["Title"] = "EditUser";
+    var session = new LoginSession(Context.Session);
+}
+
+<h1>@ViewBag.Action User</h1>
+<br />
+
+<div class="row">
+    <div class="col">
+        <br />
+        <form asp-action="AddUser" method="post">
+            <div class="row">
+                <div class="col">
+                    <label class="label" asp-for="FirstName">First:</label>
+                    <input asp-for="FirstName" type="text" class="form-control" id="firstName" />
+                </div>
+                <div class="col">
+                    <label class="label" asp-for="LastName">Last:</label>
+                    <input asp-for="LastName" type="text" class="form-control" id="lastName" />
+                </div>
+                @if (session.GetUserRole() == "1")
+                {
+                <div class="col">
+                    <label class="label" asp-for="UserRole.userDescription">User Role:</label>
+                    <select asp-for="userRoleId" class="form-control">
+                        @foreach (UserRole u in ViewBag.UserRole)
+                        {
+                            <option value="@u.userRoleId">@u.userDescription</option>
+                        }
+                    </select>
+                </div>
+                }
+                else
+                {
+                    <input type="hidden" asp-for="userRoleId" />
+                }
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="label" asp-for="Email">Email:</label>
+                    <input asp-for="Email" type="text" class="form-control" id="email" />
+                </div>
+                <div class="col">
+                    <label class="label" asp-for="Password">Password:</label>
+                    <input asp-for="Password" type="text" class="form-control" id="password" />
+                </div>
+            </div>
+            <input type="hidden" asp-for="userId" />
+            <br />
+            <div class="form-group">
+                <button class="btn-dark" type="submit" value="Submit">@ViewBag.Action</button>
+                <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="Users">Close</a>
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<br />
+

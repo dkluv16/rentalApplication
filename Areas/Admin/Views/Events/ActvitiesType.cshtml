@@ -1,0 +1,53 @@
+﻿@model List<ActivityType>
+@{
+    ViewData["Title"] = "ActvitiesType";
+}
+
+<h1>Actvities</h1>
+<br />
+
+<div class="row">
+    <div class="col">
+        <br />
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID:</th>
+                        <th>Type:</th>
+                        <th>Description:</th>
+                        <th>Cost:</th>
+                        <th>Start Date Available:</th>
+                        <th>End Date Available:</th>
+                        <th>Date Updated:</th>
+                        <th>Is Active:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var activity in Model)
+                    {
+                      <tr>
+                          <td>@activity.activityTypeId</td>
+                          <td>@activity.name</td>
+                          <td>@activity.description</td>
+                          <td>@activity.cost</td>
+                          <td>@activity.TimeOfYear.startDate</td>
+                          <td>@activity.TimeOfYear.endDate</td>
+                          <td>@activity.dateUpdated</td>
+                          <td>@activity.isActive</td>
+                          <td>
+                              <a asp-area="Admin" asp-controller="Events" asp-action="EditActivitiesType" asp-route-id="@activity.activityTypeId"><img src="~/img/edit.png" alt="View" style="width:24px; height:24px;" /></a>
+                              <a asp-area="Admin" asp-controller="Events" asp-action="DeleteActivitiesType" asp-route-id="@activity.activityTypeId"><img src="~/img/bin.png" alt="View" style="width:24px; height:24px;" /></a>
+                          </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        <a class="btn btn-success ml-2" asp-area="Admin" asp-action="AddActivitiesType">Add</a>
+        <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="Dashboard">Close</a>
+        <a class="btn btn-info ml-2" asp-area="Admin" asp-action="TimeOfYear">Time Of Year</a>
+        <br />
+    </div>
+</div>
+<br />
+<br />
+

@@ -1,0 +1,63 @@
+﻿@model List<ProgramChoice>
+@{
+    ViewData["Title"] = "ActvitiesEdit";
+}
+
+<h1>Edit Actvities</h1>
+<br />
+
+<div class="row">
+    <div class="col">
+        <br />
+        <form asp-action="ActvitiesEdit" method="post">
+
+
+            <table class="table table-bordered table-striped">
+
+                @foreach (var programChoice in @Model)
+                {
+
+                    @if (programChoice.registerId == ViewBag.RegisterId)
+                    {
+                        string editId = programChoice.programChoiceId.ToString() + "edit";
+                        string editNumberId = programChoice.programChoiceId.ToString() + "edited";
+                        <tr>
+                            <td style="width: 10%">
+                                <label for="floatingInput" class="label" asp-for="@programChoice.programChoiceId">Update</label>
+                                <input id="@programChoice.programChoiceId" name="selectedProgramId" class="form-control" onchange="editField(@programChoice.programChoiceId)" value="@programChoice.programChoiceId" type="checkbox" />
+                            </td>
+                            <td style="width: 20%">
+                                <label for="floatingInput" class="label" asp-for="@programChoice.ActivityType.name">Activity:</label>
+                                <select class="form-control" id="@editId" name="selectedActivity" asp-for="@programChoice.activityTypeId" disabled>
+                                    @foreach (ActivityType a in ViewBag.ActivityType)
+                                    {
+                                        <option value="@a.activityTypeId">@a.name</option>
+                                    }
+                                </select>
+                            </td>
+                            <td style="width: 18%">
+                                <label for="floatingInput" class="label" asp-for="@programChoice.numberParticipating">Number Participating:</label>
+                                <input class="form-control" id="@editNumberId" name="numberActivity" asp-for="@programChoice.numberParticipating" type="number" disabled />
+                            </td>
+                            <td>
+                                <p>
+                                    @programChoice.ActivityType.description
+                                </p>
+                            </td>
+
+                        </tr>
+                    }
+
+                }
+            </table>
+
+
+            <button class="btn btn-dark" type="submit" asp-route-id="@ViewBag.RegisterId" value="Submit">@ViewBag.Action</button>
+            <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="Detail" asp-route-id="@ViewBag.RegisterId">Close</a>
+        </form>
+
+    </div>
+</div>
+<br />
+<br />
+

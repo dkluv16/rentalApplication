@@ -1,0 +1,117 @@
+﻿@{
+    var session = new LoginSession(Context.Session);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CampChetekRental</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    @if (ViewData["Title"].ToString() == "Register")
+    {
+        <script>
+            var listOfDates = @Html.Raw(Json.Serialize(ViewBag.ListOfDates));
+            console.log(listOfDates);
+           
+        </script>
+    }
+</head>
+
+<body onload="picker(...listOfDates)">
+
+    <nav class="nav">
+        <div class="container">
+            <div class="logo">
+                <a asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/img/Camp Type-Color.png" /></a>
+            </div>
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Register">Register</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="WhoWeAre">Who We Are</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Services">Services</a></li>
+                    @if (session.GetName() != null)
+                    {
+                        <li><a asp-area="Admin" asp-controller="Home" asp-action="Login">Sign Out</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-area="Admin" asp-controller="Home" asp-action="Login">Login</a></li>
+                    }
+                </ul>
+            </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </div>
+    </nav>
+    @if (ViewData["Title"].ToString() == "Home Page")
+    {
+        <section class="home" style="background-image: url(../img/background.jpg)"></section>
+    }
+    else if (ViewData["Title"].ToString() == "WhoWeAre")
+    {
+        <section class="home" style="background-image: url(/img/Housing.jpg)"></section>
+    }
+    else if (ViewData["Title"].ToString() == "Services")
+    {
+        <section class="home" style="background-image: url(/img/linksOnTheLake.jpg)"></section>
+    }
+    else if (ViewData["Title"].ToString() == "SelectedNeeds")
+    {
+        <section class="home" style="background-image: url(/img/WakeSurfing.jpg)"></section>
+    }
+    else if (ViewData["Title"].ToString() == "Register")
+    {
+        <section class="home" style="background-image: url(/img/Horses.jpg)"></section>
+    }
+    else if (ViewData["Title"].ToString() == "Quote")
+    {
+        <section class="home" style="background-image: url(/img/Blob.jpg)"></section>
+    }
+    else if (ViewData["Title"].ToString() == "Needs")
+    {
+        <section class="home" style="background-image: url(/img/MeetingArea.jpg)"></section>
+    }
+    else if (ViewData["Title"].ToString() == "Meals")
+    {
+        <section class="home" style="background-image: url(/img/Meals.jpg)"></section>
+    }
+    else if (ViewData["Title"].ToString() == "Housing")
+    {
+        <section class="home" style="background-image: url(/img/Housing.jpg)"></section>
+    }
+    else
+    {
+        <section class="home" style="background-image: url(/img/Activity.jpg)"></section>
+    }
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - CampChetekRental - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

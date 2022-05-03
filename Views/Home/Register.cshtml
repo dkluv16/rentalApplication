@@ -1,0 +1,129 @@
+﻿@model Register
+@{
+    ViewData["Title"] = "Register";
+}
+<h1>@ViewData["Title"]</h1>
+
+<br />
+
+<div style="height: 1000px">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <form asp-action="Register" method="post">
+        <div class="row">
+            <div class="col">
+                <label class="label" asp-for="event_start">Arrival</label>
+                <div id="flatpickrcontainer" class="form-group">
+                    <input asp-for="event_start" type="text" id="time" class="form-control" value="" placeholder="Select Date..." data-input>
+                </div>
+
+            </div>
+            <div class="col">
+                <label class="label" asp-for="event_end">Departure</label>
+                <div id="flatpickrcontainer1" class="form-group">
+                    <input asp-for="event_end" type="text" id="time" class="form-control" value="" placeholder="Select Date..." data-input>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="firstName" asp-for="FirstName">First Name:</label>
+                    <input asp-for="FirstName" type="text" class="form-control" id="firstName" placeholder="First Name" />
+                    <small id="firstNameHelp" class="form-text text-muted">Enter Your First Name</small>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="lastName" asp-for="LastName">List Name:</label>
+                    <input asp-for="LastName" type="text" class="form-control" id="lastName" placeholder="Last Name" />
+                    <small id="lastNameHelp" class="form-text text-muted">Enter Your Last Name</small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="groupName">Group Type:</label>
+                    <select asp-for="GroupTypeId" class="form-control">
+
+                        @foreach (GroupType g in ViewBag.GroupType)
+                        {
+                            <option value="@g.GroupTypeId">@g.TypeName</option>
+                        }
+                    </select>
+                    <small id="groupNameHelp" class="form-text text-muted">Please select what best describes your group.</small>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="groupNumber" asp-for="GroupNumber">Number Attending:</label>
+                    <input asp-for="GroupNumber" type="number" class="form-control" id="numberAttending" placeholder="25" />
+                    <small id="numberAttendingHelp" class="form-text text-muted">Total Number Attending</small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="phoneNumber" asp-for="Phone">Contact Phone Number:</label>
+                    <input asp-for="Phone" type="text" class="form-control" id="numberAttending" placeholder="715 333-2345" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="email" asp-for="Email">Contact Email:</label>
+                    <input asp-for="Email" type="text" class="form-control" id="email" placeholder="campchetek@gmail.com" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="address" asp-for="Address">Address:</label>
+                    <input asp-for="Address" type="text" class="form-control" id="address" placeholder="" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="city" asp-for="City">City:</label>
+                    <input asp-for="City" type="text" class="form-control" id="city" placeholder="" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="State" asp-for="State">State:</label>
+                    <input asp-for="State" type="text" class="form-control" id="state" placeholder="" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="zip" asp-for="Zip">Zip:</label>
+                    <input asp-for="Zip" type="text" class="form-control" id="zip" placeholder="" />
+                </div>
+            </div>
+        </div>
+        <br />
+        <h3>Optional (If Applies To Your Group)</h3>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="FoodAllergies" asp-for="FoodAllergies">Food Allergies:</label>
+                    <input asp-for="FoodAllergies" type="text" class="form-control" id="foodAllergies" />
+                    <small id="foodAllergies" class="form-text text-muted">List any known food allergies:</small>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="Pet" asp-for="Pet">Will Any One In Your Group Be Bring A Pet?</label>
+                    <input asp-for="Pet" type="checkbox" class="form-control" id="pet" />
+                    <small id="Pet" class="form-text text-muted">A pet fee will be applied, if bring a pet.</small>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn-dark" type="submit" value="Submit">@ViewBag.Action</button>
+        </div>
+    </form>
+</div>

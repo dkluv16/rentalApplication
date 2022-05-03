@@ -1,0 +1,41 @@
+﻿@model ProgramChoice
+@{
+    ViewData["Title"] = "Activities";
+}
+
+<h1>Activity Options</h1>
+<br />
+
+    <form asp-action="Activities" method="post">
+        <br />
+        <h1>Activites</h1>
+
+        <div class="row">
+            <div class="col">
+                <table class="table table-bordered table-striped">
+                    @foreach (ActivityType a in ViewBag.ActivityType)
+                    {
+                        string idForNumber = a.activityTypeId.ToString() + "num";
+                        <tr>
+                            <td>
+                                <input id="@a.activityTypeId" name="SelectedActivity" onchange="toggle(@a.activityTypeId)" value="@a.activityTypeId" type="checkbox" />
+                            </td>
+                            <td>
+                                <label id="@a.activityTypeId" asp-for="@a.activityTypeId">@a.name</label>
+                            </td>
+
+                            <td><h3>@a.description</h3></td>
+                            <td><label class="label alert-dark" id="@a.cost">$@a.cost per</label> </td>
+                            <td><div class="form-floating" id="@a.activityTypeId cont" style="display:none;"><label for="floatingInput" asp-for="numberParticipating">Number Participating: &nbsp&nbsp</label><input class="form-control" id="@idForNumber" name="SelectedNumber" value="" type="number" /></div></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <button class="btn btn-dark" type="submit" value="Submit">@ViewBag.Action</button>
+    </form>
+    <br />
+    <br />
+    <br />
+
+

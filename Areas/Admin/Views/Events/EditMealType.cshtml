@@ -1,0 +1,38 @@
+﻿@model MealType
+@{
+    ViewData["Title"] = "EditMealType";
+}
+
+<h1>@ViewBag.Action Meal</h1>
+<br />
+        <br />
+        <form asp-action="AddMealsType" method="post">
+            <div class="row">
+                <div class="col">
+                    <label class="label" asp-for="mealDescription">Description:</label>
+                    <input asp-for="mealDescription" type="text" class="form-control" id="mealDescription" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="label" asp-for="cost">Cost:</label>
+                    <input asp-for="cost" type="text" class="form-control" id="cost" />
+                </div>
+                <div class="col">
+                    <label class="label" asp-for="type">Type:</label>
+                    <input asp-for="type" type="text" class="form-control" id="type" />
+                </div>
+                <div class="col">
+                    <label class="label" asp-for="isActive">Is Active:</label>
+                    <input asp-for="isActive" type="checkbox" class="form-control" id="isActive" />
+                </div>
+            </div>
+            <input type="hidden" asp-for="mealTypeId" />
+            <br />
+            <div class="form-group">
+                <button class="btn-dark" type="submit" value="Submit">@ViewBag.Action</button>
+                <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="MealsType">Close</a>
+            </div>
+        </form>
+<br />
+<br />

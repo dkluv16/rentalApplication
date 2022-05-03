@@ -1,0 +1,132 @@
+﻿@model HousingChoice
+@{
+    ViewData["Title"] = "Housing";
+}
+<br />
+<h1>Housing And Meeting Options</h1>
+<br />
+
+
+    <form asp-action="Housing" method="post">
+        <br />
+        <div class="row">
+            <div class="col">
+                <br />
+                <h3>Meeting Area Options</h3>
+                <table class="table table-bordered table-striped">
+                    @foreach (HousingType h in ViewBag.MeetingType)
+                    {
+                       string idForNumber = h.housingTypeId.ToString() + "num";
+                       string idForBedding = h.housingTypeId.ToString() + "bed";
+                       
+                        <tr>
+                            <td>
+                                <input id="@h.housingTypeId" value="@h.housingTypeId" onchange="toggle(@h.housingTypeId)" name="lodging" type="checkbox" />
+                            </td>
+                            <td>
+                                <label asp-for="@h.housingTypeId">@h.building</label>
+                            </td>
+                            <td>
+                                <h3>@h.buildingDescription</h3>
+                            </td>
+                            <td>
+                                <label class="label alert-dark" id="@h.cost">$@h.cost per</label>
+                            </td>
+                            <td>
+                                <div class="form-floating" id="@h.housingTypeId cont" style="display:none;">
+                                    <label for="floatingInput" class="label" asp-for="numberHousing">Number Needing To Accommodate:</label>
+                                    <input class="form-control" id="@idForNumber" name="selectedNumber" value="" type="number" />
+                                    <input type="number" name="bedding" value="" id="@idForBedding" hidden/>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>Lodging</h3>
+                <table class="table table-bordered table-striped">
+                    @foreach (HousingType h in ViewBag.LodgingType)
+                    {
+                        string idForNumber = h.housingTypeId.ToString() + "num";
+                        string idForBedding = h.housingTypeId.ToString() + "bed";
+                        <tr>
+                            <td>
+                                <input id="@h.housingTypeId" value="@h.housingTypeId" onchange="toggle(@h.housingTypeId)" name="lodging" type="checkbox" />
+                            </td>
+                            <td>
+                                <label asp-for="@h.housingTypeId">@h.building</label>
+                            </td>
+                            <td>
+                                <h3>@h.buildingDescription</h3>
+                            </td>
+                            <td>
+                                <label class="label alert-dark" id="@h.cost">$@h.cost per</label>
+                                
+                            </td>
+                            <td>
+                                <div class="form-floating" id="@h.housingTypeId cont" style="display:none;">
+                                    <label for="floatingInput" class="label" asp-for="numberHousing">Number Needing To Accommodate:</label>
+                                    <input class="form-control" id="@idForNumber" name="selectedNumber" value="" type="number" />
+                                    <input type="number" name="bedding" value="" id="@idForBedding" hidden/>
+                                </div>
+                            </td>
+                        </tr>
+
+                    }
+                    @foreach (HousingType h in ViewBag.LodgingTypeBedding)
+                    {
+                        string idForNumber = h.housingTypeId.ToString() + "num";
+                        string idForBedding = h.housingTypeId.ToString() + "bed";
+                <tr>
+                    <td>
+                        <input id="@h.housingTypeId" value="@h.housingTypeId" onchange="toggle(@h.housingTypeId)" name="lodging" type="checkbox" />
+                    </td>
+                    <td>
+                        <label asp-for="@h.housingTypeId">@h.building</label>
+                    </td>
+                    <td>
+                        <h3>@h.buildingDescription</h3>
+                    </td>
+                    <td>
+                        <label class="label alert-dark" id="@h.cost">$@h.cost per</label>                          
+                    </td>
+                    <td>
+                        <div class="form-floating" id="@h.housingTypeId cont" style="display:none;">
+                            <label for="floatingInput" class="label" asp-for="numberHousing">Number Needing To Accommodate:</label>
+                            <input class="form-control" id="@idForNumber" name="selectedNumber" value="" type="number" />
+                            <br />
+                            <label for="floatingInput" class="col-form-label-sm">Will you need bedding?</label>
+
+                            <select name="bedding" id="@idForBedding" value="">
+                                <option hidden value=""></option>
+                                @foreach (BeddingType b in ViewBag.BeddingType)
+                                {
+                                    var name = "";
+
+                                    if (b.isBedding == true)
+                                    {
+                                        name = "Yes";
+                                    }
+                                    else
+                                    {
+                                        name = "No";
+                                    }
+                                    <option id="@idForBedding" value="@b.beddingTypeId">@name | $@b.cost</option>
+                                }
+                            </select>
+                            <small id="groupNameHelp" class="form-text text-muted">A one time fee.</small>
+                        </div>
+                    </td>
+                </tr>
+
+                    }
+
+                </table>
+            </div>
+        </div>
+        <button class="btn btn-dark" type="submit" value="Submit">@ViewBag.Action</button>
+    </form>
+

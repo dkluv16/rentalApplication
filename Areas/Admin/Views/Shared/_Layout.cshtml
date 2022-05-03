@@ -1,0 +1,155 @@
+﻿@{ 
+    var session = new LoginSession(Context.Session);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CampChetekRental</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    @if (ViewData["Title"].ToString() == "Login" || ViewData["Title"].ToString() == "CreateNew")
+    {
+        <link rel="stylesheet" href="~/css/site.css" />
+    }
+    else
+    {
+        <link rel="stylesheet" href="~/css/DashboardStyle.css" />
+}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body onload="picker()" class="d-flex flex-column min-vh-100">
+    @if (ViewData["Title"].ToString() == "Login" || ViewData["Title"].ToString() == "CreateNew")
+    {
+        <nav class="nav">
+            <div class="container">
+                <div class="logo">
+                    <a asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/img/Camp Type-Color.png" /></a>
+                </div>
+                <div id="mainListDiv" class="main_list">
+                    <ul class="navlinks">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Register">Register</a></li>
+                        <li><a href="#">Who We Are</a></li>
+                        <li><a href="#">Services</a></li>
+                        @if (session.GetName() != null)
+                        {
+                            <li><a asp-area="Admin" asp-controller="Home" asp-action="Login">Sign Out</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-area="Admin" asp-controller="Home" asp-action="Login">Login</a></li>
+                        }
+                    </ul>
+                </div>
+                <span class="navTrigger">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </span>
+            </div>
+        </nav>
+        @if (ViewData["Title"].ToString() == "Login")
+        {
+            <section class="home" style="background-image: url(/img/Activity.jpg)"></section>
+        }
+        else
+        {
+            <section class="home" style="background-image: url(/img/WhoWeAre.jpg)"></section>
+        }
+
+    }
+    else
+    {
+        <input type="checkbox" id="check">
+        <!--header area start-->
+        <header>
+            <label for="check">
+                <i class="fas fa-bars" id="sidebar_btn"></i>
+            </label>
+            <div class="left_area">
+                <h3>Camp <span>Chetek</span></h3>
+            </div>
+            <div class="right_area">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Login" class="logout_btn">Logout</a>
+            </div>
+        </header>
+        <!--header area end-->
+        <!--mobile navigation bar start-->
+        <div class="mobile_nav">
+            <div class="nav_bar">
+                <img src="~/img/profile.png" class="mobile_profile_image" alt="">
+                <i class="fa fa-bars nav_btn"></i>
+            </div>
+            <div class="mobile_nav_items">
+                <a asp-area="Admin" asp-controller="Events" asp-action="Dashboard"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+                @if (session.GetUserRole() == "1")
+                {
+                    <a asp-area="Admin" asp-controller="Events" asp-action="BlockDates"><i class="fas fa-calendar-times"></i><span>Block-out Dates</span></a>
+                    <a asp-area="Admin" asp-controller="Events" asp-action="ActvitiesType"><i class="fas fa-hiking"></i><span>Actvities</span></a>
+                }
+                @if (session.GetUserRole() == "1" || session.GetUserRole() == "3")
+                {
+                    <a asp-area="Admin" asp-controller="Events" asp-action="MealsType"><i class="fas fa-pizza-slice"></i><span>Meals</span></a>
+                }
+                @if (session.GetUserRole() == "1" || session.GetUserRole() == "2")
+                {
+                    <a asp-area="Admin" asp-controller="Events" asp-action="HousingType"><i class="fas fa-home"></i><span>Housing</span></a>
+                }
+                <a asp-area="Admin" asp-controller="Events" asp-action="Users"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+            </div>
+        </div>
+        <!--mobile navigation bar end-->
+        <!--sidebar start-->
+<div class="sidebar">
+    <div class="profile_info">
+        <img src="~/img/profile.png" class="profile_image" alt="">
+        <h4>@(session.GetName())</h4>
+    </div>
+    <a asp-area="Admin" asp-controller="Events" asp-action="Dashboard"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+    @if (session.GetUserRole() == "1")
+    {
+        <a asp-area="Admin" asp-controller="Events" asp-action="BlockDates"><i class="fas fa-calendar-times"></i><span>Block-out Dates</span></a>
+        <a asp-area="Admin" asp-controller="Events" asp-action="ActvitiesType"><i class="fas fa-hiking"></i><span>Actvities</span></a>
+    }
+    @if (session.GetUserRole() == "1" || session.GetUserRole() == "3")
+    {
+        <a asp-area="Admin" asp-controller="Events" asp-action="MealsType"><i class="fas fa-pizza-slice"></i><span>Meals</span></a>
+    }
+    @if (session.GetUserRole() == "1" || session.GetUserRole() == "2")
+    {
+        <a asp-area="Admin" asp-controller="Events" asp-action="HousingType"><i class="fas fa-home"></i><span>Housing</span></a>
+    }
+        <a asp-area="Admin" asp-controller="Events" asp-action="Users"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+</div>
+    }
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            <div class="content">       
+                    @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer text-muted">
+        <div class="container">
+            &copy; 2022 - CampChetekRental - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.nav_btn').click(function () {
+                $('.mobile_nav_items').toggleClass('active');
+            });
+        });
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

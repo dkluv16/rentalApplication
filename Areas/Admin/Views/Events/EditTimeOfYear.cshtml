@@ -1,0 +1,39 @@
+﻿@model TimeOfYear
+@{
+    ViewData["Title"] = "EditTimeOfYear";
+}
+
+<h1>@ViewBag.Action Time Of Year</h1>
+
+<br />
+
+<form asp-action="AddTimeOfYear" method="post">
+    <div class="row">
+        <div class="col">
+            <label class="label" asp-for="season">Season:</label>
+            <input asp-for="season" type="text" class="form-control" id="season" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label class="label" asp-for="startDate">Start Date</label>
+            <div id="flatpickrcontainer" class="form-group">
+                <input asp-for="startDate" type="text" id="time" class="form-control" placeholder="Select Date..." data-input>
+            </div>
+        </div>
+        <div class="col">
+            <label class="label" asp-for="endDate">End Date</label>
+            <div id="flatpickrcontainer1" class="form-group">
+                <input asp-for="endDate" type="text" id="time" class="form-control" placeholder="Select Date..." data-input>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" asp-for="timeOfYearId" />
+    <div class="form-group">
+        <button class="btn-dark" type="submit" value="Submit">@ViewBag.Action</button>
+        <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="TimeOfYear">Close</a>
+    </div>
+</form>
+<br />
+<br />
+

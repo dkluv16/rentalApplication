@@ -1,0 +1,130 @@
+﻿@model Register
+@{
+    ViewData["Title"] = "Quote";
+    var session = new RegisterSession(Context.Session);
+}
+
+<br />
+<br />
+
+<div class="container bootstrap">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default invoice" id="invoice">
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-sm-6 top-left">
+                            <i class="fa fa-rocket"><img src="~/img/Camp Type-Color.png" height="50" /></i>
+                        </div>
+
+                        <div class="col-sm-6 top-right">
+                            <h3 class="marginright">Quote-@(session.GetRegisterId())</h3>
+                            <span class="marginright">@ViewBag.Date</span>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="row">
+
+                        <div class="col-xs-4 from">
+                            <p class="lead marginbottom">From : Camp Chetek</p>
+                            <p>730 Lakeview Drive</p>
+                            <p>Chetek, WI 54728</p>
+                            <p>Phone: (715) 924-3236</p>
+                            <p>Email: office@campchetek.org</p>
+                        </div>
+                        @foreach (Register r in ViewBag.Register)
+                        {
+                            <div class="col-xs-4 to">
+                                <p class="lead marginbottom">To : @r.FirstName @r.LastName</p>
+                                <p>@r.Address</p>
+                                <p>@r.City, @r.State @r.Zip</p>
+                                <p>Phone: @r.Phone</p>
+                                <p>Email: @r.Email</p>
+
+                            </div>
+                        }
+                        <div class="col-xs-4 text-right payment-details">
+                            <p class="lead marginbottom payment-info">Payment details</p>
+                            <p>Date: @ViewBag.Date</p>
+                            <p>VAT: DK@(session.GetRegisterId()) </p>
+                            <p>Total Amount: $@ViewBag.total</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row table-row">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width:5%">#</th>
+                                    <th style="width:50%">Item</th>
+                                    <th class="text-right" style="width:15%">Quantity</th>
+                                    <th class="text-right" style="width:15%">Unit Price</th>
+                                    <th class="text-right" style="width:15%">Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (HousingChoice h in ViewBag.Housing)
+                                {
+                                    var bedding = "";
+                                
+                                <tr>
+                                    <td class="text-center">@h.housingChoiceId</td>
+                                    @if (h.beddingTypeId == 2)
+                                    {
+                                        bedding = " With Bedding | $15";
+                                    }
+                                    <td>@h.HousingType.building <b>@bedding</b></td>
+                                    <td class="text-right">@h.numberHousing</td>
+                                    <td class="text-right">$@h.HousingType.cost</td>
+
+                                    <td class="text-right">@{int housingTotal = h.numberHousing * h.HousingType.cost + h.BeddingType.cost;} $@housingTotal</td>
+                                </tr>
+                                 }
+                                @foreach (MealChoice m in ViewBag.Meals)
+                                {
+                                    <tr>
+                                        <td class="text-center">@m.mealChoiceId</td>
+                                        <td>@m.MealType.mealDescription</td>
+                                        <td class="text-right">@m.numberOfMeals</td>
+                                        <td class="text-right">$@m.MealType.cost</td>
+                                        <td class="text-right">@{int mealTotal = m.numberOfMeals * m.MealType.cost;} $@mealTotal</td>
+                                    </tr>
+                                            }
+                                @foreach (ProgramChoice p in ViewBag.Activity)
+                                {
+                                    <tr class="last-row">
+                                        <td class="text-center">@p.programChoiceId</td>
+                                        <td>@p.ActivityType.name</td>
+                                        <td class="text-right">@p.numberParticipating</td>
+                                        <td class="text-right">$@p.ActivityType.cost</td>
+                                        <td class="text-right">@{int activityTotal = p.numberParticipating * p.ActivityType.cost;} $@activityTotal</td>
+                                    </tr>
+                                            }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-6 margintop">
+                            <p class="lead marginbottom">THANK YOU!</p>
+
+                            <button class="btn btn-success"  onclick="print()" id="invoice-print"><i class="fa fa-print" value="Print Portion"></i> Print Quote</button> 
+                            <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-envelope-o"></i> Home</a>
+                        </div>
+                        <div class="col-xs-6 text-right pull-right invoice-total">
+                            <p>Pet Fee: $@ViewBag.PetFee</p>
+                            <p>Housing Total : $@ViewBag.totalHousing</p>
+                            <p>Meals Total : $@ViewBag.totalMeals</p>
+                            <p>Activities Total: $@ViewBag.totalActivity</p>
+                            <p>Total : $@ViewBag.total</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

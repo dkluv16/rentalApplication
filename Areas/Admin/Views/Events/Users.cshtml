@@ -1,0 +1,45 @@
+﻿@model List<User>
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h1>Users</h1>
+<br />
+<div class="row">
+    <div class="col">
+        <br />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID:</th>
+                    <th>First:</th>
+                    <th>Last:</th>
+                    <th>Email:</th>
+                    <th>Password:</th>
+                    <th>User Role:</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.userId</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.Email</td>
+                        <td>@user.Password</td>
+                        <td>@user.UserRole.userDescription</td>
+                        <td>
+                            <a asp-area="Admin" asp-controller="Events" asp-action="EditUser" asp-route-id="@user.userId"><img src="~/img/edit.png" alt="View" style="width:24px; height:24px;" /></a>
+                            <a asp-area="Admin" asp-controller="Events" asp-action="DeleteUser" asp-route-id="@user.userId"><img src="~/img/bin.png" alt="View" style="width:24px; height:24px;" /></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a class="btn btn-success ml-2" asp-area="Admin" asp-action="AddUser">Add</a>
+        <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="Dashboard">Close</a>
+    </div>
+</div>
+<br />
+<br />

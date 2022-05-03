@@ -1,0 +1,113 @@
+﻿@model MealChoice
+@{
+    ViewData["Title"] = "Meals";
+}
+<br />
+<h1>Meal Options</h1>
+<br />
+
+
+<br />
+
+    <form asp-action="Meals" method="post">
+        <br />
+      
+        <div class="row">
+            <div class="col">
+                <br />
+                <h3>Breakfast</h3>
+                <table class="table table-bordered table-striped">
+                    @foreach (MealType m in ViewBag.BreakfastType)
+                    {
+                        string idForNumber = m.mealTypeId.ToString() + "num";
+                        <tr>
+                            <td>
+                                <input id="@m.mealTypeId" name="selectedMeal" onchange="toggle(@m.mealTypeId)" value="@m.mealTypeId" type="checkbox" />
+
+                            </td>
+                            <td>
+                                <label class="label alert-info" id="@m.mealTypeId" asp-for="@m.mealTypeId">@m.type</label>
+                            </td>
+                            <td>
+                                <h3>@m.mealDescription</h3>
+                            </td>
+                            <td>
+                                <label class="label alert-dark" id="@m.cost">$@m.cost per</label>
+                            </td>
+                            <td>
+                                <div class="form-floating" id="@m.mealTypeId cont" style="display:none;">
+                                    <label for="floatingInput" class="label" asp-for="numberOfMeals">Number Of Breakfasts Needed:</label>
+                                    <input class="form-control" id="@idForNumber" name="selectedNumber" value="" type="number" placeholder="Number"/>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <br />
+                <h3>Lunch</h3>
+                <table class="table table-bordered table-striped">
+                    @foreach (MealType m in ViewBag.LunchType)
+                    {
+                        string idForNumber = m.mealTypeId.ToString() + "num";
+                    <tr>
+                        <td>
+                            <input id="@m.mealTypeId" name="selectedMeal" onchange="toggle(@m.mealTypeId)" value="@m.mealTypeId" type="checkbox" />
+
+                        </td>
+                        <td>
+                            <label class="label alert-info" id="@m.mealTypeId" asp-for="@m.mealTypeId">@m.type</label>
+                        </td>
+                        <td>
+                            <h3>@m.mealDescription</h3>
+                        </td>
+                        <td>
+                            <label class="label alert-dark" id="@m.cost">$@m.cost per</label>
+                        </td>
+                        <td>
+                            <div class="form-floating" id="@m.mealTypeId cont" style="display:none;">
+                                <label for="floatingInput" class="label" asp-for="numberOfMeals">Number Of Lunchs Needed:</label>
+                                <input class="form-control" id="@idForNumber" name="selectedNumber" value="" type="number" placeholder="Number"/>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </table>
+                <br />
+                <h3>Dinner</h3>
+                <table class="table table-bordered table-striped">
+                    @foreach (MealType m in ViewBag.DinnerType)
+                    {
+                        string idForNumber = m.mealTypeId.ToString() + "num";
+                    <tr>
+                        <td>
+                            <input id="@m.mealTypeId" name="selectedMeal" onchange="toggle(@m.mealTypeId)" value="@m.mealTypeId" type="checkbox" />
+
+                        </td>
+                        <td>
+                            <label class="label alert-info" id="@m.mealTypeId" asp-for="@m.mealTypeId">@m.type</label>
+                        </td>
+                        <td>
+                            <h3>@m.mealDescription</h3>
+                        </td>
+                        <td>
+                            <label class="label alert-dark" id="@m.cost">$@m.cost per</label>
+                        </td>
+                        <td>
+                            <div class="form-floating" id="@m.mealTypeId cont" style="display:none;">
+                                <label for="floatingInput" class="label" asp-for="numberOfMeals">Number Of Dinners Needed:</label>
+                                <input class="form-control" id="@idForNumber" name="selectedNumber" value="" type="number" />
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <button class="btn btn-dark" type="submit" value="Submit">@ViewBag.Action</button>
+        </div>
+    </form>
+
+
+

@@ -1,0 +1,64 @@
+﻿@model List<MealChoice>
+@{
+    ViewData["Title"] = "MealsEdit";
+}
+
+<h1>Edit Meals</h1>
+<br />
+
+<div class="row">
+    <div class="col">
+        <br />
+        <form asp-action="MealsEdit" method="post">
+
+
+            <table class="table table-bordered table-striped">
+
+                @foreach (var meal in @Model)
+                {
+
+                    @if (meal.registerId == ViewBag.RegisterId)
+                    {
+                        string editId = meal.mealChoiceId.ToString() + "edit";
+                        string editNumberId = meal.mealChoiceId.ToString() + "edited";
+                        <tr>
+                            <td style="width: 10%">
+                                <label for="floatingInput" class="label" asp-for="@meal.mealChoiceId">Update</label>
+                                <input id="@meal.mealChoiceId." name="selectedMealsId" class="form-control" onchange="editField(@meal.mealChoiceId)" value="@meal.mealChoiceId" type="checkbox" />
+                            </td>
+                            <td style="width: 58%">
+                                <label for="floatingInput" class="label" asp-for="@meal.MealType.mealDescription">Selected Meal:</label>
+                                <select class="form-control" id="@editId" name="selectedMeals" asp-for="@meal.mealTypeId" disabled>
+                                    @foreach (MealType m in ViewBag.MealTypes)
+                                    {
+                                        <option value="@m.mealTypeId">@m.mealDescription</option>
+                                    }
+                                </select>
+                            </td>
+                            <td style="width: 15%">
+                                <label for="floatingInput" class="label" asp-for="@meal.numberOfMeals">Number Of Meals:</label>
+                                <input class="form-control" id="@editNumberId" name="numberMeals" asp-for="@meal.numberOfMeals" type="number" disabled />
+                            </td>
+                            <td>
+                                <p>
+                                    @meal.MealType.type
+                                </p>
+                            </td>
+
+                        </tr>
+                    }
+
+                }
+            </table>
+
+
+            <button class="btn btn-dark" type="submit" asp-route-id="@ViewBag.RegisterId" value="Submit">@ViewBag.Action</button>
+            <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="Detail" asp-route-id="@ViewBag.RegisterId">Close</a>
+        </form>
+
+    </div>
+</div>
+<br />
+<br />
+
+

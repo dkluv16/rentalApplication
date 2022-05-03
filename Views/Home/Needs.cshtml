@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "Needs";
+    var session = new RegisterSession(Context.Session);
+}
+
+<h1>Needs</h1>
+<br />
+    <form asp-action="Needs" method="post">
+        <br />
+        <div class="row">
+            <div class="col">
+                <h3>What Will You Need During Your Stay?</h3>
+                <br />
+                <small><b>Select All That Apply</b></small>
+                <br />
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <input class="form-control" id="Housing" value="Housing" name="needs" type="checkbox" />
+                            <label class="col-form-label" id="Housing">Overnight Accommodations Or Meeting Space?</label>
+                            <br />
+                            <small>Variety of different housing options and meeting space to best fit your groups needs.</small>
+                        </div>
+                    </div>
+                    
+                    <div class="col">
+                        <div class="form-group">
+                            <input class="form-control" id="Activities" value="Activities" name="needs" type="checkbox" />
+                            <label class="col-form-label" id="Activities">Scheduled Programmed Activities?</label>
+                            <br />
+                            <small>Water Tubing, Laser Tag, High Ropes Course, Horseback Riding, ect..</small>
+                        </div>
+                    </div>
+                        
+                    <div class="col">
+                        <div class="form-group">
+                            <input class="form-control" id="Meals" value="Meals" name="needs" type="checkbox" />
+                            <label class="col-form-label" id="Meals">Meal Options?</label>
+                            <br />
+                            <small>Multiple meal options available, customize it to your needs.</small>
+                        </div>
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+        <br />
+        <br />
+        <button class="btn btn-dark" type="Submit">Submit</button>
+</form>
+<br />
+<br />

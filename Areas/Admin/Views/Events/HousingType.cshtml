@@ -1,0 +1,51 @@
+﻿@model List<HousingType>
+@{
+    ViewData["Title"] = "HousingType";
+}
+
+<h1>Housing & Meeting Space</h1>
+<br />
+
+<div class="row">
+    <div class="col">
+        <br />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Building:</th>
+                    <th>Building Description:</th>
+                    <th>Cost:</th>
+                    <th>Type:</th>
+                    <th>Is Active</th>
+                    <th>Date Updated:</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var housing in Model)
+                {
+                    <tr>
+                        <td>@housing.housingTypeId</td>
+                        <td>@housing.building</td>
+                        <td>@housing.buildingDescription</td>
+                        <td>@housing.cost</td>
+                        <td>@housing.type</td>
+                        <td>@housing.isActive</td>
+                        <td>@housing.dateUpdated</td>
+                        <td>
+                            <a asp-area="Admin" asp-controller="Events" asp-action="EditHousingType" asp-route-id="@housing.housingTypeId"><img src="~/img/edit.png" alt="View" style="width:24px; height:24px;" /></a>
+                            <a asp-area="Admin" asp-controller="Events" asp-action="DeleteHousingType" asp-route-id="@housing.housingTypeId"><img src="~/img/bin.png" alt="View" style="width:24px; height:24px;" /></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <a class="btn btn-success ml-2" asp-area="Admin" asp-action="AddHousingType">Add</a>
+        <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="Dashboard">Close</a>
+        <br />
+    </div>
+</div>
+<br />
+<br />
+

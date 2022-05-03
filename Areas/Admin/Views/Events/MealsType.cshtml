@@ -1,0 +1,48 @@
+﻿@model List<MealType>
+@{
+    ViewData["Title"] = "MealType";
+}
+
+<h1>Meals Type</h1>
+<br />
+
+<div class="row">
+    <div class="col">
+        <br />
+        
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID:</th>
+                        <th>Description</th>
+                        <th>Cost:</th>
+                        <th>Type:</th>
+                        <th>Is Active:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var meal in Model)
+                    {
+                        <tr>
+                            <td>@meal.mealTypeId</td>
+                            <td>@meal.mealDescription</td>
+                            <td>@meal.cost</td>
+                            <td>@meal.type</td>
+                            <td>@meal.isActive</td>
+                            <td>
+                                <a asp-area="Admin" asp-controller="Events" asp-action="EditMealType" asp-route-id="@meal.mealTypeId"><img src="~/img/edit.png" alt="View" style="width:24px; height:24px;" /></a>
+                                <a asp-area="Admin" asp-controller="Events" asp-action="DeleteMealType" asp-route-id="@meal.mealTypeId"><img src="~/img/bin.png" alt="View" style="width:24px; height:24px;" /></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+       
+        <a class="btn btn-success ml-2" asp-area="Admin" asp-action="AddMealsType">Add</a>
+        <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="Dashboard">Close</a>
+        <br />
+    </div>
+</div>
+<br />
+<br />
+
