@@ -10,60 +10,60 @@
     <div class="col">
         <br />
         <form asp-action="HousingEdit" method="post">
-           
 
-            <table class="table table-bordered table-striped">
+            <div class="table-responsive-md">
+                <table class="table table-bordered table-striped">
 
-                @foreach (var housing in @Model)
-                {
-
-                    @if (housing.registerId == ViewBag.RegisterId)
+                    @foreach (var housing in @Model)
                     {
-                        string editId = housing.housingChoiceId.ToString() + "edit";
-                        string editNumberId = housing.housingChoiceId.ToString() + "edited";
-                        string editBeddingId = housing.housingChoiceId.ToString() + "beddingEdit";
-                        <tr>
-                            <td style="width: 10%">
-                                <label for="floatingInput" class="label" asp-for="@housing.housingChoiceId">Update</label>
-                                <input id="@housing.housingChoiceId" name="selectedHousingId" class="form-control" onchange="editField(@housing.housingChoiceId)" value="@housing.housingChoiceId" type="checkbox" />
-                            </td>
-                            <td style="width: 18%">
-                                <label for="floatingInput" class="label" asp-for="@housing.HousingType.type">@housing.HousingType.type:</label>
-                                <select class="form-control" id="@editId" name="selectedHousing" asp-for="@housing.housingTypeId" disabled>
-                                    @foreach (HousingType h in ViewBag.HousingType)
-                                    {
-                                        <option value="@h.housingTypeId">@h.building</option>
-                                    }
-                                </select>
-                            </td>
-                            <td style="width: 24%">
-                                <label for="floatingInput" class="label" asp-for="@housing.numberHousing">Number Staying:</label>
-                                <input class="form-control" id="@editNumberId" name="numberHousing" asp-for="@housing.numberHousing" type="number" disabled />
-                            </td>
-                            <td  style="width: 15%">
-                                <label for="floatingInput" class="label" asp-for="@housing.BeddingType.isBedding">Bedding:</label>
-                                <select class="form-control" id="@editBeddingId" name="selectedBedding" asp-for="@housing.beddingTypeId" disabled>
-                                    @foreach (BeddingType b in ViewBag.BeddingType)
-                                    {
-                                        <option value="@b.beddingTypeId">@b.isBedding</option>
-                                    }
-                                </select>
-                            </td>
-                            <td>
-                                <p>
-                                    @housing.HousingType.buildingDescription
-                                </p>
-                            </td>
 
-                        </tr>
+                        @if (housing.registerId == ViewBag.RegisterId)
+                        {
+                            string editId = housing.housingChoiceId.ToString() + "edit";
+                            string editNumberId = housing.housingChoiceId.ToString() + "edited";
+                            string editBeddingId = housing.housingChoiceId.ToString() + "beddingEdit";
+                            <tr>
+                                <td style="width: 10%">
+                                    <label for="floatingInput" class="label" asp-for="@housing.housingChoiceId">Update</label>
+                                    <input id="@housing.housingChoiceId" name="selectedHousingId" class="form-control" onchange="editField(@housing.housingChoiceId)" value="@housing.housingChoiceId" type="checkbox" />
+                                </td>
+                                <td style="width: 18%">
+                                    <label for="floatingInput" class="label" asp-for="@housing.HousingType.type">@housing.HousingType.type:</label>
+                                    <select class="form-control" id="@editId" name="selectedHousing" asp-for="@housing.housingTypeId" disabled>
+                                        @foreach (HousingType h in ViewBag.HousingType)
+                                        {
+                                            <option value="@h.housingTypeId">@h.building</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td style="width: 24%">
+                                    <label for="floatingInput" class="label" asp-for="@housing.numberHousing">Number Staying:</label>
+                                    <input class="form-control" id="@editNumberId" name="numberHousing" asp-for="@housing.numberHousing" type="number" disabled />
+                                </td>
+                                <td style="width: 15%">
+                                    <label for="floatingInput" class="label" asp-for="@housing.BeddingType.isBedding">Bedding:</label>
+                                    <select class="form-control" id="@editBeddingId" name="selectedBedding" asp-for="@housing.beddingTypeId" disabled>
+                                        @foreach (BeddingType b in ViewBag.BeddingType)
+                                        {
+                                            <option value="@b.beddingTypeId">@b.isBedding</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <p>
+                                        @housing.HousingType.buildingDescription
+                                    </p>
+                                </td>
+
+                            </tr>
+                        }
+
                     }
+                </table>
+                </div>
 
-                }
-            </table>
-
-          
-            <button class="btn btn-dark" type="submit" asp-route-id="@ViewBag.RegisterId" value="Submit">@ViewBag.Action</button>
-            <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="Detail" asp-route-id="@ViewBag.RegisterId">Close</a>
+                <button class="btn btn-dark" type="submit" asp-route-id="@ViewBag.RegisterId" value="Submit">@ViewBag.Action</button>
+                <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="Detail" asp-route-id="@ViewBag.RegisterId">Close</a>
         </form>
            
         </div>

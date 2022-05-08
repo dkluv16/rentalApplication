@@ -9,36 +9,38 @@
 <div class="row">
     <div class="col">
         <br />
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID:</th>
-                    <th>Start Date:</th>
-                    <th>End Date:</th>
-                    <th>Season:</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var timeOfYear in Model)
-                {
+        <div class="table-responsive-md">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>@timeOfYear.timeOfYearId</td>
-                        <td>@timeOfYear.startDate</td>
-                        <td>@timeOfYear.endDate</td>
-                        <td>@timeOfYear.season</td>
-                        <td>
-                            <a asp-area="Admin" asp-controller="Events" asp-action="EditTimeOfYear" asp-route-id="@timeOfYear.timeOfYearId"><img src="~/img/edit.png" alt="View" style="width:24px; height:24px;" /></a>
-                            <a asp-area="Admin" asp-controller="Events" asp-action="DeleteTimeOfYear" asp-route-id="@timeOfYear.timeOfYearId"><img src="~/img/bin.png" alt="View" style="width:24px; height:24px;" /></a>
-                        </td>
+                        <th>ID:</th>
+                        <th>Start Date:</th>
+                        <th>End Date:</th>
+                        <th>Season:</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-        <a class="btn btn-success ml-2" asp-area="Admin" asp-action="AddTimeOfYear">Add</a>
-        <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="Dashboard">Close</a>
-        <br />
+                </thead>
+                <tbody>
+                    @foreach (var timeOfYear in Model)
+                    {
+                        <tr>
+                            <td>@timeOfYear.timeOfYearId</td>
+                            <td>@timeOfYear.startDate</td>
+                            <td>@timeOfYear.endDate</td>
+                            <td>@timeOfYear.season</td>
+                            <td>
+                                <a asp-area="Admin" asp-controller="Events" asp-action="EditTimeOfYear" asp-route-id="@timeOfYear.timeOfYearId"><img src="~/img/edit.png" alt="View" style="width:24px; height:24px;" /></a>
+                                <a asp-area="Admin" asp-controller="Events" asp-action="DeleteTimeOfYear" asp-route-id="@timeOfYear.timeOfYearId"><img src="~/img/bin.png" alt="View" style="width:24px; height:24px;" /></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </div>
+            <a class="btn btn-success ml-2" asp-area="Admin" asp-action="AddTimeOfYear">Add</a>
+            <a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Events" asp-action="Dashboard">Close</a>
+            <br />
+        </div>
     </div>
-</div>
 <br />
 <br />
 

@@ -39,7 +39,7 @@ namespace CampChetekRental.Controllers
             var register = context.register.OrderBy(r => r.event_start).ToList();
             var blockDates = context.blockDates.OrderBy(b => b.startDate).ToList();
             List<string> listOfDates = new List<string>();
-           
+            //Adding the dates between start and end to a list, to bock dates
             foreach(var choice in register)
             {
                for(var dt = choice.event_start; dt <= choice.event_end; dt = dt.AddDays(1))
@@ -120,7 +120,7 @@ namespace CampChetekRental.Controllers
                 {
                     int start = choice.TimeOfYear.startDate.Month;
                     int end = choice.TimeOfYear.endDate.Month;
-
+                   //Checking each activity to make sure its available during the dates selected
                     if(start <= startDate & startDate <= end)
                     {
                         listOfActivities.Add(choice);
@@ -159,6 +159,7 @@ namespace CampChetekRental.Controllers
             
             var mealList = context.mealTypes.Where(l => l.isActive == true).ToList();
             var session = new RegisterSession(HttpContext.Session);
+            //Breaking the mealType into three list, to display in view.
             ViewBag.BreakfastType = mealList.Where(s => s.type.Equals("Breakfast"));
             ViewBag.LunchType = mealList.Where(s => s.type.Equals("Lunch"));
             ViewBag.DinnerType = mealList.Where(s => s.type.Equals("Dinner"));         
@@ -195,6 +196,7 @@ namespace CampChetekRental.Controllers
             var housingList = context.housingTypes.Where(l => l.isActive == true).ToList();
             var session = new RegisterSession(HttpContext.Session);
             ViewBag.Action = "Submit";
+            //Breaking the housingType into three list, to display in view.
             ViewBag.BeddingType = context.beddingTypes.OrderBy(t => t.cost).ToList();
             ViewBag.MeetingType = housingList.Where(s => s.type.Equals("Meeting Area"));
             ViewBag.LodgingType = housingList.Where(s => s.type.Equals("Lodging"));
@@ -234,7 +236,7 @@ namespace CampChetekRental.Controllers
         [HttpPost]
         public IActionResult Needs(List<string> needs)
         {
-
+            
             var session = new RegisterSession(HttpContext.Session);
             foreach (var choice in needs)
             {
@@ -263,6 +265,7 @@ namespace CampChetekRental.Controllers
             string activitiesComplete = session.GetActivitesComplete();
             string mealsComplete = session.GetMealsComplete();
 
+            //Checking to make sure all selected areas are complete before displaying the quote view.
             if (session.GetRegisterId() != null)
             {
                 if (housing != null && housingComplete == "COMPLETE" && activities == null && meal == null)

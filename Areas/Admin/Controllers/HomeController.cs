@@ -19,8 +19,7 @@ namespace CampChetekRental.Areas.Admin.Controllers
             context = ctx;
         }
         
-        [Route("{UserEmail?}")]
-        [Route("{UserPassword}")]
+        [HttpPost]
         public IActionResult Login(string UserEmail, string UserPassword)
         {
 
@@ -42,7 +41,6 @@ namespace CampChetekRental.Areas.Admin.Controllers
                 session.SetUserRole(userRole.ToString());
                 return RedirectToAction("Dashboard", "Events");       
             }
-           
             else
             {
                 HttpContext.Session.Clear();
@@ -50,7 +48,11 @@ namespace CampChetekRental.Areas.Admin.Controllers
             }
 
         }
-        
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult CreateNew()
         {
