@@ -86,15 +86,4 @@ function editField(number) {
     $('#' + number + 'edited').prop('disabled', (i, v) => !v);
     $('#' + number + 'beddingEdit').prop('disabled', (i, v) => !v);
 }
-function PrintPartOfPage(dvprintid) {
-    var prtContent = document.getElementById(dvprintid);
-    var WinPrint = window.open('', '', 'letf=100,top=100,width=600,height=600');
-    WinPrint.document.write('<html><head><title>' + document.title + '</title>');
-    WinPrint.document.write('</head><body >');
-    WinPrint.document.write(prtContent.innerHTML);
-    WinPrint.document.write('</body></html>');
-    WinPrint.document.close();
-    WinPrint.focus();
-    WinPrint.print();   
-    mywindow.close();
-}
+

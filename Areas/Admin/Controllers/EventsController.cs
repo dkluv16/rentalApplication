@@ -83,6 +83,7 @@ namespace CampChetekRental.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult MealsEdit(List<int> selectedMealsId, List<int> selectedMeals, List<int> numberMeals, int id)
         {
+            //Zip three list together, allowing to update multiple values at once in the mealChoices table.
             List<MealChoice> mealChoices = new List<MealChoice>();
             foreach (var meal in selectedMealsId.ZipThree(selectedMeals, numberMeals, Tuple.Create))
             {
@@ -106,6 +107,7 @@ namespace CampChetekRental.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult HousingEdit(List<int> selectedHousingId, List<int> selectedHousing, List<int> numberHousing, List<int> selectedBedding, int id)
         {
+            //Zip three list together, allowing to update multiple values at once in the housingChoices table.
             List<HousingChoice> housingChoices = new List<HousingChoice>();
             foreach (var choice in selectedHousingId.ZipFour(selectedHousing, numberHousing, selectedBedding, Tuple.Create))
             {
@@ -128,6 +130,7 @@ namespace CampChetekRental.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult ActvitiesEdit(List<int> selectedProgramId, List<int> selectedActivity, List<int> numberActivity, int id)
         {
+            //Zip three list together, allowing to update multiple values at once in the programChoice table.
             List<ProgramChoice> programChoices = new List<ProgramChoice>();
             foreach (var activity in selectedProgramId.ZipThree(selectedActivity, numberActivity, Tuple.Create))
             {
@@ -320,8 +323,6 @@ namespace CampChetekRental.Areas.Admin.Controllers
                 return View(user.ToList());
             }
             
-            
-
         }
         [HttpGet]
         public IActionResult EditUser(int id)
@@ -423,14 +424,13 @@ namespace CampChetekRental.Areas.Admin.Controllers
 
             return RedirectToAction("Dashboard", "Events");
 
-
-
         }
 
     }
     }
 public static class ZipThreeList
 {
+    //Zips three list together
     public static IEnumerable<TResult> ZipThree<T1, T2, T3, TResult>(
         this IEnumerable<T1> source,
         IEnumerable<T2> second,
@@ -445,7 +445,7 @@ public static class ZipThreeList
                 yield return func(e1.Current, e2.Current, e3.Current);
         }
     }
-
+    //Zips four list together
     public static IEnumerable<TResult> ZipFour<T1, T2, T3, T4, TResult>(
        this IEnumerable<T1> source,
        IEnumerable<T2> second,
